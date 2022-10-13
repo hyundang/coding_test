@@ -1,3 +1,5 @@
+# counting sort
+
 import sys
 
 N = int(input())
