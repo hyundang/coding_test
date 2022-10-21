@@ -6,17 +6,14 @@ let input = fs
     .split("\n");
 let [n, m] = input[0].split(' ').map((e) => +e);
 
-let arr = [];
-for (let i = 1; i <= n; i++) {
-    arr.push(i);
-}
+let arr = input[1].split(' ').map((e) => +e).sort((a, b) => a - b)
 
 const getPermuations = (arr, selectNum) => {
     let res = [];
     if (selectNum === 1) return arr.map((e) => [e]);
 
     arr.forEach((fixed, idx, origin) => {
-        let newArr = [...origin];
+        let newArr = [...origin.slice(idx)];
         let permutations = getPermuations(newArr, selectNum - 1);
         let attached = permutations.map((e) => [fixed, ...e]);
         res.push(...attached);
@@ -25,6 +22,4 @@ const getPermuations = (arr, selectNum) => {
 }
 
 let res = getPermuations(arr, m);
-res = res.map((e) => e.sort((a, b) => a - b).join(' '));
-res = new Set(res);
-res.forEach((e) => e && console.log(e));
+res = res.map((e) => console.log(e.sort((a, b)=>a-b).join(' ')));
